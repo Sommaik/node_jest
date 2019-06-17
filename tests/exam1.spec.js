@@ -15,4 +15,10 @@ describe("Exam1", () => {
     const result = exam1.add(1.235, 1);
     expect(result).toEqual(2.235);
   });
+
+  test("Shoud call helloWorldCallback retrun h = Hello", () => {
+    exam1.helloWorldCallback(function(h, w) {
+      expect(h).toEqual("Hello");
+    });
+  });
 });
