@@ -21,4 +21,10 @@ describe("Exam1", () => {
       expect(h).toEqual("Hello");
     });
   });
+
+  test("Shoud call helloWorldCallback retrun w = Word", () => {
+    exam1.helloWorldCallback(function(h, w) {
+      expect(w).toEqual("ThisWorld");
+    });
+  });
 });
