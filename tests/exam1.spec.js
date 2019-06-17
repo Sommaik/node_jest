@@ -53,8 +53,26 @@ describe("Exam1", () => {
   });
 
   test("should callback err, value from waterfallcallback", () => {
-    exam1.waterfallcallback((err, result) => {
+    exam1.waterfallcallback(8, (err, result) => {
       expect(result).toEqual("success");
+    });
+  });
+
+  test("should return error when call waterfall", () => {
+    exam1.waterfallcallback(13, (err, result) => {
+      expect(err).toEqual("more than ten");
+    });
+  });
+
+  test("should callback err, value from seriecallback", () => {
+    exam1.seriescallback(8, (err, result) => {
+      expect(result).toEqual(["one", "two", "three"]);
+    });
+  });
+
+  test("should callback err, value from paralellcallback", () => {
+    exam1.parallelcallback(8, (err, result) => {
+      expect(result).toEqual(["one p", "two p"]);
     });
   });
 });

@@ -19,11 +19,12 @@ class Exam1 {
     });
   }
 
-  waterfallcallback(cb) {
+  waterfallcallback(value, cb) {
     asyncmodule.waterfall(
       [
         function(callback) {
-          callback(null, "one", "two");
+          if (value > 10) callback("more than ten");
+          else callback(null, "one", "two");
         },
         function(var1, var2, callback) {
           callback(null, "success");
@@ -32,6 +33,39 @@ class Exam1 {
       function(err, result) {
         cb(err, result);
       }
+    );
+  }
+
+  seriescallback(value, cb) {
+    asyncmodule.series(
+      [
+        function(callback) {
+          if (value > 10) callback("error more than 10");
+          else callback(null, "one");
+        },
+        function(callback) {
+          callback(null, "two");
+        },
+        function(callback) {
+          callback(null, "three");
+        }
+      ],
+      cb
+    );
+  }
+
+  parallelcallback(value, cb) {
+    asyncmodule.parallel(
+      [
+        function(callback) {
+          if (value > 10) callback("error more than 10");
+          else callback(null, "one p");
+        },
+        function(callback) {
+          callback(null, "two p");
+        }
+      ],
+      cb
     );
   }
 }
