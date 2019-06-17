@@ -1,6 +1,6 @@
 const fiz = require("../../app/service/fiz").fiz;
 const fiz2 = require("../../app/service/fiz").fiz2;
-describe("fize", () => {
+describe("fiz service", () => {
   it("should return fiz!", () => {
     expect(fiz()).toEqual("fiz!");
   });

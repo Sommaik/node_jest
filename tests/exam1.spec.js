@@ -27,4 +27,15 @@ describe("Exam1", () => {
       expect(w).toEqual("ThisWorld");
     });
   });
+
+  test("should resolve hello value", () => {
+    exam1.prom(11).then(result => {
+      expect(result).toEqual("hello");
+    });
+  });
+  test("should reject lower than ten", () => {
+    exam1.prom(1).catch(reason => {
+      expect(reason).toEqual("lower than ten");
+    });
+  });
 });
