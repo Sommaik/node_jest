@@ -14,5 +14,8 @@
   "devDependencies": {
     "jest": "^24.8.0",
     "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "async": "^3.0.1"
   }
 }

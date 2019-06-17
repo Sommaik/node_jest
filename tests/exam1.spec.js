@@ -33,9 +33,28 @@ describe("Exam1", () => {
       expect(result).toEqual("hello");
     });
   });
+
   test("should reject lower than ten", () => {
     exam1.prom(1).catch(reason => {
       expect(reason).toEqual("lower than ten");
+    });
+  });
+
+  test("should await hello value", async () => {
+    expect(await exam1.prom(11)).toEqual("hello");
+  });
+
+  test("should catch exception", async () => {
+    try {
+      const result = await exam1.prom(1);
+    } catch (e) {
+      expect(e).toEqual("lower than ten");
+    }
+  });
+
+  test("should callback err, value from waterfallcallback", () => {
+    exam1.waterfallcallback((err, result) => {
+      expect(result).toEqual("success");
     });
   });
 });

@@ -1,3 +1,5 @@
+const asyncmodule = require("async");
+
 class Exam1 {
   constructor(var1) {
     this.var1 = var1;
@@ -15,6 +17,22 @@ class Exam1 {
       if (value > 10) resolve("hello");
       else reject("lower than ten");
     });
+  }
+
+  waterfallcallback(cb) {
+    asyncmodule.waterfall(
+      [
+        function(callback) {
+          callback(null, "one", "two");
+        },
+        function(var1, var2, callback) {
+          callback(null, "success");
+        }
+      ],
+      function(err, result) {
+        cb(err, result);
+      }
+    );
   }
 }
 const exam1 = new Exam1("This");
