@@ -3,6 +3,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const login = require("./controller/login");
 const auth = require("./helper/auth");
+const multer = require("multer");
+const upload = multer({
+  dest: "upload/"
+});
 
 const app = express();
 app.use(cors());
@@ -35,6 +39,12 @@ app.get("/users/:userId/books/:bookId", (req, res) => {
   res.json({
     success: true,
     data
+  });
+});
+
+app.post("/profile", upload.single("avatar"), (req, res) => {
+  res.json({
+    success: true
   });
 });
 
