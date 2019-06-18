@@ -1,9 +1,8 @@
-const http = require("http");
+const express = require("express");
+const cors = require("cors");
 
-http
-  .createServer((req, res) => {
-    res.end("yes you can");
-  })
-  .listen(8000);
+const app = express();
+app.use(cors());
+app.options("*", cors());
 
-console.log("Server start on port 8000");
+module.exports = app;
