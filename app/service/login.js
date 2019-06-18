@@ -1,4 +1,8 @@
 const mydb = require("../helper/mydb");
+const jwt = require("jwt-simple");
+const config = require("config");
+const Config = config.get("Config");
+
 class Login {
   async singin(userId, password) {
     const result = await mydb.doQuery(
@@ -10,7 +14,7 @@ class Login {
     if (result) {
       return {
         success: true,
-        token: "xxxx"
+        token: jwt.encode(result, Config.auth.jwtSecret)
       };
     } else {
       return {

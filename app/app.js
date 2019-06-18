@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const login = require("./controller/login");
+const auth = require("./helper/auth");
 
 const app = express();
 app.use(cors());
@@ -9,6 +10,7 @@ app.options("*", cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(auth.initialize());
 
 app.use("/login", login);
 
@@ -16,7 +18,7 @@ app.get("/", (req, res) => {
   res.end("Hello World");
 });
 
-app.get("/dum", (req, res) => {
+app.get("/dum", auth.authenticate(), (req, res) => {
   res.end("dummy");
 });
 

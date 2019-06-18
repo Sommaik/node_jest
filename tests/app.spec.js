@@ -1,5 +1,8 @@
 const app = require("../app/app");
 const request = require("supertest");
+const jwt = require("jwt-simple");
+const config = require("config");
+const Config = config.get("Config");
 
 describe("app", () => {
   it("should return hello world", async () => {
@@ -29,5 +32,14 @@ describe("app", () => {
       success: true,
       data: { userId: "100", bookId: "8989" }
     });
+  });
+
+  it("should return dummy when get /dummy ", async () => {
+    const token = await jwt.encode({}, Config.auth.jwtSecret);
+    const resp = await request(app)
+      .get("/dum")
+      .set("Authorization", "jwt " + token);
+    expect(resp.statusCode).toEqual(200);
+    expect(resp.text).toEqual("dummy");
   });
 });
