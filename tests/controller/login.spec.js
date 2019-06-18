@@ -1,5 +1,8 @@
 const request = require("supertest");
 const app = require("../../app/app");
+jest.mock("mongodb");
+const mongo = require("../../app/helper/mongodb");
+
 describe("login controller", () => {
   it("should return token when login complete", async () => {
     const resp = await request(app).post("/login");
